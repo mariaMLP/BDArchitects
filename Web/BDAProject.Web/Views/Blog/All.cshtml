@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "All";
+}
+
+<section class="py-5">
+    <div class="container">
+        <h1 style="margin: 2%; text-align: center;">All Posts</h1>
+        <div style="margin: 2%; text-align: center;">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Blog" asp-action="Add"><strong>Add Post</strong></a>
+        </div>
+        <div style="padding: 5%;">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Username</th>
+                        <th scope="col">Post</th>
+                        <th scope="col">CreatedOn</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                     {
+                    <tr>
+                        <th scope="row">@item.UserName</th>
+                        <td>@item.Text</td>
+                        <td>@item.CreatedOn</td>
+                        <td>
+                            <div class="button-holder">
+                                <a href="/All/Add" class="btn btn-info text-uppercase">Info</a>
+                            </div>
+                        </td>
+                    </tr>
+                     }
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</section>

@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\BDAProject.Data.Common\BDAProject.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\BDAProject.Data.Models\BDAProject.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\BDAProject.Web.ViewModels\BDAProject.Web.ViewModels.csproj" />
     <ProjectReference Include="..\BDAProject.Services.Mapping\BDAProject.Services.Mapping.csproj" />
   </ItemGroup>
 
