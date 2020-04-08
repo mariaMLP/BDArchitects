@@ -4,9 +4,9 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class Post
+    public class Like
     {
-        public Post()
+        public Like()
         {
             this.Id = Guid.NewGuid().ToString();
         }
@@ -14,10 +14,9 @@
         public string Id { get; set; }
 
         [Required]
-        public string Text { get; set; }
+        public string PostId { get; set; }
 
-        [Required]
-        public DateTime CreatedOn { get; set; }
+        public Post Post { get; set; }
 
         [Required]
         public string UserId { get; set; }

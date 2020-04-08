@@ -5,6 +5,7 @@
     using BDAProject.Data.Models;
     using BDAProject.Services.Data;
     using BDAProject.Web.ViewModels.Blog;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
 
     using Microsoft.AspNetCore.Mvc;
@@ -25,12 +26,14 @@
             return this.View(this.blogService.GetAll());
         }
 
+        [Authorize]
         public IActionResult Add()
         {
             return this.View();
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Add(PostAddInputModel postInput)
         {
             var userId = this.userManager.GetUserId(this.User);

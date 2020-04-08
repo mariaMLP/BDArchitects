@@ -28,6 +28,8 @@
 
         public DbSet<Post> Posts { get; set; }
 
+        public DbSet<Like> Likes { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

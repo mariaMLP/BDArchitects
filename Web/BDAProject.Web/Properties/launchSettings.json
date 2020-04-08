@@ -10,10 +10,7 @@
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": true,
-      "environmentVariables": {
-        "SENDGRID_KEY": "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"
-      }
+      "launchBrowser": true
     },
     "BDAProject.Web": {
       "commandName": "Project",

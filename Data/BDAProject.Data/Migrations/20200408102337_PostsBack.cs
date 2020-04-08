@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace BDAProject.Data.Migrations
+﻿namespace BDAProject.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class PostsBack : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
