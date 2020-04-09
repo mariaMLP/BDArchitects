@@ -38,14 +38,14 @@
         }
 
         [Authorize]
-        public IActionResult Add()
+        public IActionResult AddPost()
         {
             return this.View();
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Add(PostAddInputModel postInput)
+        public async Task<IActionResult> AddPost(PostAddInputModel postInput)
         {
             var userId = this.userManager.GetUserId(this.User);
             var username = this.userManager.GetUserName(this.User);
