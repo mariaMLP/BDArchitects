@@ -26,6 +26,17 @@
             return this.View(this.blogService.GetAll());
         }
 
+        [HttpPost]
+        public async Task<IActionResult> All(string postId)
+        {
+            var userId = this.userManager.GetUserId(this.User);
+            var username = this.userManager.GetUserName(this.User);
+
+            await this.blogService.CreateLike(userId, postId, username);
+
+            return this.Redirect($"/Blog/All");
+        }
+
         [Authorize]
         public IActionResult Add()
         {
@@ -39,7 +50,7 @@
             var userId = this.userManager.GetUserId(this.User);
             var username = this.userManager.GetUserName(this.User);
 
-            await this.blogService.CreateAsync(userId, postInput.Text, username);
+            await this.blogService.CreatePost(userId, postInput.Text, username);
 
             return this.Redirect($"/Blog/All");
         }

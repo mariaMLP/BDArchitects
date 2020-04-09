@@ -11,18 +11,20 @@
 
     public class BlogService : IBlogService
     {
-        private readonly IRepository<Post> repository;
+        private readonly IRepository<Post> postRepository;
+        private readonly IRepository<Like> likeRepository;
 
-        public BlogService(IRepository<Post> repository)
+        public BlogService(IRepository<Post> postRepository, IRepository<Like> likeRepository)
         {
-            this.repository = repository;
+            this.postRepository = postRepository;
+            this.likeRepository = likeRepository;
         }
 
-        public async Task CreateAsync(string userId, string text, string username)
+        public async Task CreatePost(string userId, string text, string username)
         {
             var postId = Guid.NewGuid().ToString();
 
-            await this.repository.AddAsync(new Post
+            await this.postRepository.AddAsync(new Post
             {
                 Id = postId,
                 Text = text,
@@ -31,12 +33,27 @@
                 UserName = username,
             });
 
-            await this.repository.SaveChangesAsync();
+            await this.postRepository.SaveChangesAsync();
+        }
+
+        public async Task CreateLike(string userId, string postId, string username)
+        {
+            var likeId = Guid.NewGuid().ToString();
+
+            await this.likeRepository.AddAsync(new Like
+            {
+                Id = likeId,
+                PostId = postId,
+                UserId = userId,
+                UserName = username,
+            });
+
+            await this.likeRepository.SaveChangesAsync();
         }
 
         public IQueryable<Post> GetAll()
         {
-            return this.repository.All();
+            return this.postRepository.All();
         }
     }
 }

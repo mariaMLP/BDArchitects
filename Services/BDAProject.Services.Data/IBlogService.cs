@@ -7,7 +7,9 @@
 
     public interface IBlogService
     {
-        Task CreateAsync(string userId, string text, string username);
+        Task CreatePost(string userId, string text, string username);
+
+        Task CreateLike(string userId, string postId, string username);
 
         IQueryable<Post> GetAll();
     }
