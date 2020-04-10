@@ -1,6 +1,7 @@
 ﻿namespace BDAProject.Data.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -27,5 +28,7 @@
 
         [Required]
         public string UserName { get; set; }
+
+        public ICollection<Like> Likes { get; set; } = new HashSet<Like>();
     }
 }

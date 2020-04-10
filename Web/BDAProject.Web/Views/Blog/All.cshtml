@@ -15,7 +15,8 @@
                         <th scope="col">Username</th>
                         <th scope="col">Post</th>
                         <th scope="col">CreatedOn</th>
-                        <th scope="col">Info</th>
+                        <th scope="col">Likes</th>
+                        <th>Like</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,6 +27,7 @@
                         <th scope="row">@item.UserName</th>
                         <td>@item.Text</td>
                         <td>@item.CreatedOn</td>
+                        <td>@item.Likes.Count</td>
                         <td>
                             <form asp-controller="Blog" asp-action="All" method="post">
                                 <input type="hidden" name="postId" value="@item.Id" />

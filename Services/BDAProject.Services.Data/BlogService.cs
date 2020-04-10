@@ -8,6 +8,7 @@
     using BDAProject.Data.Common.Repositories;
     using BDAProject.Data.Models;
     using BDAProject.Web.ViewModels.Blog;
+    using Microsoft.EntityFrameworkCore;
 
     public class BlogService : IBlogService
     {
@@ -38,22 +39,42 @@
 
         public async Task CreateLike(string userId, string postId, string username)
         {
-            var likeId = Guid.NewGuid().ToString();
+            var like = this.likeRepository.All()
+                .Where(l => l.PostId == postId && l.UserId == userId)
+                .FirstOrDefault();
 
-            await this.likeRepository.AddAsync(new Like
+            if (like == null)
             {
-                Id = likeId,
-                PostId = postId,
-                UserId = userId,
-                UserName = username,
-            });
+                var likeId = Guid.NewGuid().ToString();
 
-            await this.likeRepository.SaveChangesAsync();
+                var likeNew = new Like
+                {
+                    Id = likeId,
+                    PostId = postId,
+                    UserId = userId,
+                    UserName = username,
+                };
+
+                await this.likeRepository.AddAsync(likeNew);
+
+                await this.likeRepository.SaveChangesAsync();
+
+                var post = this.postRepository.All()
+                .Where(p => p.Id == postId)
+                .FirstOrDefault();
+
+                post.Likes.Add(likeNew);
+            }
+        }
+
+        public int GetAllLikesById(string postId)
+        {
+            return this.likeRepository.All().Where(l => l.PostId == postId).Count();
         }
 
         public IQueryable<Post> GetAll()
         {
-            return this.postRepository.All();
+            return this.postRepository.All().Include(p => p.Likes);
         }
     }
 }

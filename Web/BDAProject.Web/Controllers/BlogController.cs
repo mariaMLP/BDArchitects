@@ -27,6 +27,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> All(string postId)
         {
             var userId = this.userManager.GetUserId(this.User);

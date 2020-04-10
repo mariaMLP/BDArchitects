@@ -11,6 +11,8 @@
 
         Task CreateLike(string userId, string postId, string username);
 
+        int GetAllLikesById(string postId);
+
         IQueryable<Post> GetAll();
     }
 }
