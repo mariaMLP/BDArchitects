@@ -17,25 +17,43 @@
                         <th scope="col">CreatedOn</th>
                         <th scope="col">Likes</th>
                         <th></th>
+                        <th>Add Comment</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                   @foreach (var item in Model)
+                    @foreach (var item in Model)
                     {
-                      <tr>
-                        <th scope="row">@item.UserName</th>
-                        <td>@item.Text</td>
-                        <td>@item.CreatedOn</td>
-                        <td>@item.Likes.Count</td>
-                        <td>
-                            <form asp-controller="Blog" asp-action="All" method="post">
-                                <input type="hidden" name="postId" value="@item.Id" />
-                                <input type="submit" class="btn btn-outline-primary" value="Like" />
-                            </form>
-                        </td>
-                      </tr>
-                    }
+                        <tr>
+                            <th scope="row">@item.UserName</th>
+                            <td>@item.Text</td>
+                            <td>@item.CreatedOn</td>
+                            <td>@item.Likes.Count</td>
+                            <td>
+                                <form asp-controller="Blog" asp-action="All" method="post">
+                                    <input type="hidden" name="postId" value="@item.Id" />
+                                    <input type="submit" class="btn btn-outline-primary" value="Like" />
+                                </form>
+                            </td>
+                            <td>
+                                <div class="button-holder">
+                                    <a href="/Blog/AddComment?postId=@item.Id" class="btn btn-info text-uppercase">Comment</a>
+                                </div>
+                            </td>
+                        </tr>
+
+                         @if (item.Comments.Count != 0)
+                          {
+                              @foreach (var comment in item.Comments)
+                               {
+                                  <tr>
+                                      <th scope="row">@comment.UserName</th>
+                                      <td>@comment.CommentText</td>
+                                      <td>@comment.CreatedOn</td>
+                                  </tr>
+                               }
+                          }
+                     }
                 </tbody>
             </table>
         </div>

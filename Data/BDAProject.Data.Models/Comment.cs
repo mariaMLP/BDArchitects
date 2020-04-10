@@ -1,13 +1,12 @@
 ﻿namespace BDAProject.Data.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class Post
+    public class Comment
     {
-        public Post()
+        public Comment()
         {
             this.Id = Guid.NewGuid().ToString();
         }
@@ -15,10 +14,9 @@
         public string Id { get; set; }
 
         [Required]
-        public string Text { get; set; }
+        public string PostId { get; set; }
 
-        [Required]
-        public DateTime CreatedOn { get; set; }
+        public Post Post { get; set; }
 
         [Required]
         public string UserId { get; set; }
@@ -29,8 +27,10 @@
         [Required]
         public string UserName { get; set; }
 
-        public ICollection<Like> Likes { get; set; } = new HashSet<Like>();
+        [Required]
+        public string CommentText { get; set; }
 
-        public ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
+        [Required]
+        public DateTime CreatedOn { get; set; }
     }
 }

@@ -16,5 +16,7 @@
         public string UserName { get; set; }
 
         public ICollection<Like> Likes { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
     }
 }

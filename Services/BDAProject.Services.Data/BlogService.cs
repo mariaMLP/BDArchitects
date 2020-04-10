@@ -14,11 +14,13 @@
     {
         private readonly IRepository<Post> postRepository;
         private readonly IRepository<Like> likeRepository;
+        private readonly IRepository<Comment> commentRepository;
 
-        public BlogService(IRepository<Post> postRepository, IRepository<Like> likeRepository)
+        public BlogService(IRepository<Post> postRepository, IRepository<Like> likeRepository, IRepository<Comment> commentRepository)
         {
             this.postRepository = postRepository;
             this.likeRepository = likeRepository;
+            this.commentRepository = commentRepository;
         }
 
         public async Task CreatePost(string userId, string text, string username)
@@ -67,6 +69,31 @@
             }
         }
 
+        public async Task CreateComment(string userId, string postId, string username, string commentText)
+        {
+            var commentId = Guid.NewGuid().ToString();
+
+            var comment = new Comment
+            {
+                Id = commentId,
+                PostId = postId,
+                UserId = userId,
+                UserName = username,
+                CommentText = commentText,
+                CreatedOn = DateTime.UtcNow,
+            };
+
+            await this.commentRepository.AddAsync(comment);
+
+            await this.commentRepository.SaveChangesAsync();
+
+            var post = this.postRepository.All()
+            .Where(p => p.Id == postId)
+            .FirstOrDefault();
+
+            post.Comments.Add(comment);
+        }
+
         public int GetAllLikesById(string postId)
         {
             return this.likeRepository.All().Where(l => l.PostId == postId).Count();
@@ -74,7 +101,12 @@
 
         public IQueryable<Post> GetAll()
         {
-            return this.postRepository.All().Include(p => p.Likes);
+            return this.postRepository.All().Include(p => p.Likes).Include(p => p.Comments);
+        }
+
+        public Post GetPost(string postId)
+        {
+            return this.postRepository.All().Where(p => p.Id == postId).FirstOrDefault();
         }
     }
 }

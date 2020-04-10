@@ -55,5 +55,23 @@
 
             return this.Redirect($"/Blog/All");
         }
+
+        [Authorize]
+        public IActionResult AddComment(string postId)
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> AddComment(CommentAddInputModel commentInput, string postId)
+        {
+            var userId = this.userManager.GetUserId(this.User);
+            var username = this.userManager.GetUserName(this.User);
+
+            await this.blogService.CreateComment(userId, postId, username, commentInput.CommentText);
+
+            return this.Redirect($"/Blog/All");
+        }
     }
 }
