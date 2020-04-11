@@ -10,13 +10,13 @@
     using BDAProject.Web.ViewModels.Blog;
     using Microsoft.EntityFrameworkCore;
 
-    public class BlogService : IBlogService
+    public class ForumService : IForumService
     {
         private readonly IRepository<Post> postRepository;
         private readonly IRepository<Like> likeRepository;
         private readonly IRepository<Comment> commentRepository;
 
-        public BlogService(IRepository<Post> postRepository, IRepository<Like> likeRepository, IRepository<Comment> commentRepository)
+        public ForumService(IRepository<Post> postRepository, IRepository<Like> likeRepository, IRepository<Comment> commentRepository)
         {
             this.postRepository = postRepository;
             this.likeRepository = likeRepository;
@@ -101,7 +101,9 @@
 
         public IQueryable<Post> GetAll()
         {
-            return this.postRepository.All().Include(p => p.Likes).Include(p => p.Comments);
+            return this.postRepository.All().Include(p => p.Likes)
+                .Include(p => p.Comments)
+                .OrderByDescending(p => p.CreatedOn);
         }
 
         public Post GetPost(string postId)

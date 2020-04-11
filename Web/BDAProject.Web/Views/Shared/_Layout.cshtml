@@ -58,9 +58,11 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Project" asp-action="Project">Project</a>
                     </li>
-                    <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Blog" asp-action="All">Blog</a>
+                        <a class="nav-link" asp-area="" asp-controller="Blog" asp-action="Blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Forum" asp-action="All">Forum</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Contact" asp-action="Contact">Contact</a>
@@ -135,13 +137,18 @@
                         }
                         else if (ViewData["Title"].ToString() == "All")
                         {
-                            <h1 text-light>Blog</h1>
-                            <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></span> <span>Blog</span></p>
+                            <h1 text-light>Forum</h1>
+                            <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></span> <span>Forum</span></p>
                         }
                         else if (ViewData["Title"].ToString() == "AddPost")
                         {
                             <h1 text-light>Add Post</h1>
-                            <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Blog" asp-action="All">Blog</a></span> <span>Add Post</span></p>
+                            <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Forum" asp-action="All">Forum</a></span> <span>Add Post</span></p>
+                        }
+                        else if (ViewData["Title"].ToString() == "AddComment")
+                        {
+                            <h1 text-light>Add Comment</h1>
+                            <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Forum" asp-action="All">Forum</a></span> <span>Add Comment</span></p>
                         }
 
                     </div>

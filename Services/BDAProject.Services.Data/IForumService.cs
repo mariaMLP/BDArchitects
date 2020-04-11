@@ -5,7 +5,7 @@
 
     using BDAProject.Data.Models;
 
-    public interface IBlogService
+    public interface IForumService
     {
         Task CreatePost(string userId, string text, string username);
 

@@ -6,7 +6,7 @@
     <div class="container">
         <h1 style="margin: 2%; text-align: center;">All Posts</h1>
         <div style="margin: 2%; text-align: center;">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Blog" asp-action="AddPost"><strong>Add Post</strong></a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Forum" asp-action="AddPost"><strong>Add Post</strong></a>
         </div>
         <div style="padding: 5%;">
             <table class="table">
@@ -30,14 +30,14 @@
                             <td>@item.CreatedOn</td>
                             <td>@item.Likes.Count</td>
                             <td>
-                                <form asp-controller="Blog" asp-action="All" method="post">
+                                <form asp-controller="Forum" asp-action="All" method="post">
                                     <input type="hidden" name="postId" value="@item.Id" />
                                     <input type="submit" class="btn btn-outline-primary" value="Like" />
                                 </form>
                             </td>
                             <td>
                                 <div class="button-holder">
-                                    <a href="/Blog/AddComment?postId=@item.Id" class="btn btn-info text-uppercase">Comment</a>
+                                    <a href="/Forum/AddComment?postId=@item.Id" class="btn btn-info text-uppercase">Comment</a>
                                 </div>
                             </td>
                         </tr>
