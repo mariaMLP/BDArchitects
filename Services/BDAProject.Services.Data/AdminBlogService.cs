@@ -6,7 +6,7 @@
     using BDAProject.Data.Common.Repositories;
     using BDAProject.Data.Models;
 
-    public class AdminBlogService
+    public class AdminBlogService : IAdminBlogService
     {
         private readonly IDeletableEntityRepository<BlogPost> blogPostRepository;
 

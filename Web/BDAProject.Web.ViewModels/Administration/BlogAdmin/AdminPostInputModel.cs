@@ -1,4 +1,4 @@
-﻿namespace BDAProject.Web.ViewModels.Administration.Dashboard
+﻿namespace BDAProject.Web.ViewModels.Administration.BlogAdmin
 {
     public class AdminPostInputModel
     {
