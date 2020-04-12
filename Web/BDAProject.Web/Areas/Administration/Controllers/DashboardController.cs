@@ -1,8 +1,9 @@
 ﻿namespace BDAProject.Web.Areas.Administration.Controllers
 {
+    using System.Threading.Tasks;
+
     using BDAProject.Services.Data;
     using BDAProject.Web.ViewModels.Administration.Dashboard;
-
     using Microsoft.AspNetCore.Mvc;
 
     public class DashboardController : AdministrationController
@@ -16,8 +17,7 @@
 
         public IActionResult Index()
         {
-            var viewModel = new IndexViewModel { SettingsCount = this.settingsService.GetCount(), };
-            return this.View(viewModel);
+            return this.View();
         }
     }
 }

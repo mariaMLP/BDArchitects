@@ -5,7 +5,9 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class BlogPost
+    using BDAProject.Data.Common.Models;
+
+    public class BlogPost : BaseDeletableModel<string>
     {
         public BlogPost()
         {

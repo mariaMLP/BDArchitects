@@ -22,13 +22,13 @@
 
             var roleId = dbContext.Roles.FirstOrDefault(x => x.Name == GlobalConstants.AdministratorRoleName).Id;
 
-           dbContext.Users.FirstOrDefault(x => x.Id == "f1f76718-25dd-4c3f-863e-ab9c1c248c1d").Roles.Add(new IdentityUserRole<string>()
+            dbContext.Users.FirstOrDefault(x => x.Id == "f1f76718-25dd-4c3f-863e-ab9c1c248c1d").Roles.Add(new IdentityUserRole<string>()
             {
                 RoleId = roleId,
                 UserId = "f1f76718-25dd-4c3f-863e-ab9c1c248c1d",
             });
 
-           await dbContext.SaveChangesAsync();
+            await dbContext.SaveChangesAsync();
         }
     }
 }
