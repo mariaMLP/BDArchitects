@@ -32,6 +32,12 @@
 
         public DbSet<Comment> Comments { get; set; }
 
+        public DbSet<BlogPost> BlogPosts { get; set; }
+
+        public DbSet<BlogLike> BlogLikes { get; set; }
+
+        public DbSet<BlogComment> BlogComments { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
