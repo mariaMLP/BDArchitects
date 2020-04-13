@@ -5,7 +5,9 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class Post
+    using BDAProject.Data.Common.Models;
+
+    public class Post : BaseDeletableModel<string>
     {
         public Post()
         {
