@@ -5,6 +5,7 @@
     using BDAProject.Data.Models;
     using BDAProject.Services.Data;
     using BDAProject.Web.ViewModels.Blog;
+    using BDAProject.Web.ViewModels.Forum;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
 
@@ -85,6 +86,21 @@
         public async Task<IActionResult> EditPost(string postId, string text)
         {
             await this.forumService.EditPost(postId, text);
+
+            return this.Redirect($"/Forum/All");
+        }
+
+        [Authorize]
+        public IActionResult EditComment(string commentId)
+        {
+            return this.View(this.forumService.GetComment(commentId));
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> EditComment(string commentId, string commentText)
+        {
+            await this.forumService.EditComment(commentId, commentText);
 
             return this.Redirect($"/Forum/All");
         }

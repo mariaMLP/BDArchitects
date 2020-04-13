@@ -59,6 +59,14 @@
                                     <th scope="row">@comment.UserName</th>
                                     <td>@comment.CommentText</td>
                                     <td>@comment.CreatedOn</td>
+                                    <td>
+                                        @if (this.User.Identity.Name == comment.UserName)
+                                        {
+                                            <div class="button-holder">
+                                                <a href="/Forum/EditComment?commentId=@comment.Id" class="btn btn-info text-uppercase">Edit</a>
+                                            </div>
+                                        }
+                                    </td>
                                 </tr>
                             }
                          

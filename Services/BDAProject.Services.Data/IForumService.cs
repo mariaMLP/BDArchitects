@@ -20,5 +20,9 @@
         Post GetPost(string postId);
 
         Task EditPost(string id, string text);
+
+        Task EditComment(string id, string commentText);
+
+        Comment GetComment(string commentId);
     }
 }

@@ -1,18 +1,20 @@
 ﻿@{
-    ViewData["Title"] = "AddComment";
+    ViewData["Title"] = "EditComment";
 }
 
 <section class="py-5">
     <div class="container">
-        <h1 style="margin: 2%; text-align: center;">Add Comment</h1>
+        <h1 style="margin: 2%; text-align: center;">Edit Comment</h1>
         <div style="padding: 5%;">
             <form method="post">
-                <input type="hidden" name="Id" value="Id" />
                 <div class="form-group">
-                    <textarea name="CommentText" id="CommentText" required cols="30" rows="7" class="form-control" placeholder="Text"></textarea>
+                    <textarea name="CommentText" id="CommentText" required cols="30" rows="7" class="form-control" placeholder="">@Model.CommentText</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary text-uppercase">Submit</button>
             </form>
         </div>
     </div>
 </section>
+
+
+

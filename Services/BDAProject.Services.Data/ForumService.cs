@@ -122,5 +122,22 @@
 
             await this.postRepository.SaveChangesAsync();
         }
+
+        public async Task EditComment(string id, string commentText)
+        {
+            var comment = await this.commentRepository.All()
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            comment.CommentText = commentText;
+            comment.CreatedOn = DateTime.UtcNow;
+            this.commentRepository.Update(comment);
+
+            await this.commentRepository.SaveChangesAsync();
+        }
+
+        public Comment GetComment(string commentId)
+        {
+            return this.commentRepository.All().Where(c => c.Id == commentId).FirstOrDefault();
+        }
     }
 }
