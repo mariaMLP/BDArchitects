@@ -38,9 +38,36 @@
         }
 
         [Authorize]
-        public IActionResult AddBlogComment(string blogPostId)
+        public IActionResult AddBlogComment()
         {
             return this.View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> AddBlogComment(BlogCommentAddInputModel blogCommentInput, string blogPostId)
+        {
+            var userId = this.userManager.GetUserId(this.User);
+            var username = this.userManager.GetUserName(this.User);
+
+            await this.blogService.CreateBlogComment(userId, blogPostId, username, blogCommentInput.CommentText);
+
+            return this.Redirect($"/Blog/Blog");
+        }
+
+        [Authorize]
+        public IActionResult EditBlogComment(string blogCommentId)
+        {
+            return this.View(this.blogService.GetBlogComment(blogCommentId));
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> EditBlogComment(string blogCommentId, string commentText)
+        {
+            await this.blogService.EditBlogComment(blogCommentId, commentText);
+
+            return this.Redirect($"/Blog/Blog");
         }
     }
 }

@@ -16,5 +16,9 @@
         int GetAllLikesById(string postId);
 
         IQueryable<Post> GetAll();
+
+        Post GetPost(string postId);
+
+        Task EditPost(string id, string text);
     }
 }

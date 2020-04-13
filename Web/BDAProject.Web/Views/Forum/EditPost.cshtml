@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "EditPost";
+}
+
+<section class="py-5">
+    <div class="container">
+        <h1 style="margin: 2%; text-align: center;">Edit Post</h1>
+        <div style="padding: 5%;">
+            <form method="post">
+                <div class="form-group">
+                    <textarea name="Text" id="Text" cols="30" rows="7" class="form-control" placeholder="@Model.Text">@Model.Text</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary text-uppercase">Submit</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+

@@ -35,15 +35,50 @@
                             </div>
                             <div class="desc pl-3">
                                 <h3 class="heading"><a href="#">@item.Text</a></h3>
+                                @if (item.BlogComments.Count != 0)
+                                {
+                                    <div>
+                                        <ul class="list-unstyled">
+                                            @foreach (var comment in item.BlogComments)
+                                            {
+                                                <li class="media">
+                                                    <img class="mr-3" src="~/images/profile_pic.jpg" alt="Generic placeholder image" style="max-width: 45px">
+                                                    <div class="media-body">
+                                                        <h6 class="mt-0 mb-1">@comment.UserName</h6>
+                                                        <div>
+                                                            @comment.CommentText
+                                                        </div>
+                                                        <div class="text-muted small">
+                                                            @comment.CreatedOn.ToString("F")
+                                                        </div>
+                                                        @if (this.User.Identity.Name == comment.UserName)
+                                                         {   
+                                                            <div class="button-holder">
+                                                                <a href="/Blog/EditBlogComment?blogCommentId=@comment.Id" class="btn btn-info text-uppercase">Edit</a>
+                                                            </div>
+                                                         }
+                                                    </div>
+                                                </li>
+                                                <hr />
+                                            }
+                                        </ul>
+                                    </div>
+                                }
                             </div>
                             <form asp-controller="Blog" asp-action="Blog" method="post">
                                 <input type="hidden" name="blogPostId" value="@item.Id" />
                                 <input type="submit" class="btn btn-outline-primary" value="Like" />
                             </form>
+
+                            <div class="button-holder">
+                                <a href="/Blog/AddBlogComment?blogPostId=@item.Id" class="btn btn-info text-uppercase">Comment</a>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
+          
         }
-        </div>
+    </div>
 </section>

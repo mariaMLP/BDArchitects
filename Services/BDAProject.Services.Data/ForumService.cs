@@ -110,5 +110,17 @@
         {
             return this.postRepository.All().Where(p => p.Id == postId).FirstOrDefault();
         }
+
+        public async Task EditPost(string id, string text)
+        {
+            var post = await this.postRepository.All()
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            post.Text = text;
+            post.CreatedOn = DateTime.UtcNow;
+            this.postRepository.Update(post);
+
+            await this.postRepository.SaveChangesAsync();
+        }
     }
 }

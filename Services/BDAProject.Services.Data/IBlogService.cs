@@ -12,5 +12,9 @@
         Task CreateBlogLike(string userId, string blogPostId, string username);
 
         Task CreateBlogComment(string userId, string blogPostId, string username, string commentText);
+
+        Task EditBlogComment(string id, string commentText);
+
+        BlogComment GetBlogComment(string blogPostId);
     }
 }

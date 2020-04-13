@@ -82,5 +82,22 @@
 
             post.BlogComments.Add(blogComment);
         }
+
+        public async Task EditBlogComment(string id, string commentText)
+        {
+            var blogComment = await this.blogCommentRepository.All()
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            blogComment.CommentText = commentText;
+            blogComment.CreatedOn = DateTime.UtcNow;
+            this.blogCommentRepository.Update(blogComment);
+
+            await this.blogCommentRepository.SaveChangesAsync();
+        }
+
+        public BlogComment GetBlogComment(string blogPostId)
+        {
+            return this.blogCommentRepository.All().Where(p => p.Id == blogPostId).FirstOrDefault();
+        }
     }
 }

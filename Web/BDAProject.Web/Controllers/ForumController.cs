@@ -73,5 +73,20 @@
 
             return this.Redirect($"/Forum/All");
         }
+
+        [Authorize]
+        public IActionResult EditPost(string postId)
+        {
+            return this.View(this.forumService.GetPost(postId));
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> EditPost(string postId, string text)
+        {
+            await this.forumService.EditPost(postId, text);
+
+            return this.Redirect($"/Forum/All");
+        }
     }
 }

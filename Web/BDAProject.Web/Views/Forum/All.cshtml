@@ -18,6 +18,7 @@
                         <th scope="col">Likes</th>
                         <th></th>
                         <th>Add Comment</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,21 +41,31 @@
                                     <a href="/Forum/AddComment?postId=@item.Id" class="btn btn-info text-uppercase">Comment</a>
                                 </div>
                             </td>
+                            <td>
+                                @if (this.User.Identity.Name == item.UserName)
+                                {
+                                    <div class="button-holder">
+                                        <a href="/Forum/EditPost?postId=@item.Id" class="btn btn-info text-uppercase">Edit</a>
+                                    </div>
+                                }
+                            </td>
                         </tr>
 
-                         @if (item.Comments.Count != 0)
-                          {
-                              @foreach (var comment in item.Comments)
-                               {
-                                  <tr>
-                                      <th scope="row">@comment.UserName</th>
-                                      <td>@comment.CommentText</td>
-                                      <td>@comment.CreatedOn</td>
-                                  </tr>
-                               }
-                          }
-                     }
+                        @if (item.Comments.Count != 0)
+                        {
+                            @foreach (var comment in item.Comments)
+                            {
+                                <tr>
+                                    <th scope="row">@comment.UserName</th>
+                                    <td>@comment.CommentText</td>
+                                    <td>@comment.CreatedOn</td>
+                                </tr>
+                            }
+                         
+                        }
+                    }
                 </tbody>
+                
             </table>
         </div>
     </div>
