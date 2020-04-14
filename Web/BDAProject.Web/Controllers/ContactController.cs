@@ -22,7 +22,7 @@
         public IActionResult Contact(ContactInputModel contactModel)
         {
             this.contactService
-                .Execute(contactModel.Name, contactModel.Email, contactModel.Subject, contactModel.Message)
+                .Execute(contactModel.SanitizedName, contactModel.SanitizedEmail, contactModel.SanitizedSubject, contactModel.SanitizedMessage)
                 .Wait();
 
             return this.Redirect($"/");

@@ -52,13 +52,13 @@
             var userId = this.userManager.GetUserId(this.User);
             var username = this.userManager.GetUserName(this.User);
 
-            await this.forumService.CreatePost(userId, postInput.Text, username);
+            await this.forumService.CreatePost(userId, postInput.SanitizedText, username);
 
             return this.Redirect($"/Forum/All");
         }
 
         [Authorize]
-        public IActionResult AddComment(string postId)
+        public IActionResult AddComment()
         {
             return this.View();
         }
@@ -70,7 +70,7 @@
             var userId = this.userManager.GetUserId(this.User);
             var username = this.userManager.GetUserName(this.User);
 
-            await this.forumService.CreateComment(userId, postId, username, commentInput.CommentText);
+            await this.forumService.CreateComment(userId, postId, username, commentInput.SanitizedCommentText);
 
             return this.Redirect($"/Forum/All");
         }
@@ -83,9 +83,9 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> EditPost(string postId, string text)
+        public async Task<IActionResult> EditPost(string postId, EditPostModel editPostModel)
         {
-            await this.forumService.EditPost(postId, text);
+            await this.forumService.EditPost(postId, editPostModel.SanitizedText);
 
             return this.Redirect($"/Forum/All");
         }
@@ -98,9 +98,9 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> EditComment(string commentId, string commentText)
+        public async Task<IActionResult> EditComment(string commentId, EditCommentModel editCommentModel)
         {
-            await this.forumService.EditComment(commentId, commentText);
+            await this.forumService.EditComment(commentId, editCommentModel.SanitizedText);
 
             return this.Redirect($"/Forum/All");
         }

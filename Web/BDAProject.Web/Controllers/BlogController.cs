@@ -45,12 +45,12 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> AddBlogComment(BlogCommentAddInputModel blogCommentInput, string blogPostId)
+        public async Task<IActionResult> AddBlogComment(string blogPostId, BlogCommentAddInputModel blogCommentInput)
         {
             var userId = this.userManager.GetUserId(this.User);
             var username = this.userManager.GetUserName(this.User);
 
-            await this.blogService.CreateBlogComment(userId, blogPostId, username, blogCommentInput.CommentText);
+            await this.blogService.CreateBlogComment(userId, blogPostId, username, blogCommentInput.SanitizedCommentText);
 
             return this.Redirect($"/Blog/Blog");
         }
@@ -63,9 +63,9 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> EditBlogComment(string blogCommentId, string commentText)
+        public async Task<IActionResult> EditBlogComment(string blogCommentId, EditBlogCommentModel editBlogCommentModel)
         {
-            await this.blogService.EditBlogComment(blogCommentId, commentText);
+            await this.blogService.EditBlogComment(blogCommentId, editBlogCommentModel.SanitizedCommentText);
 
             return this.Redirect($"/Blog/Blog");
         }

@@ -8,7 +8,5 @@
 
         public string SanitizedCommentText
            => new HtmlSanitizer().Sanitize(this.CommentText);
-
-        public string BlogPostId { get; set; }
     }
 }

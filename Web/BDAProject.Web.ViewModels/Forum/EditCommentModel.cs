@@ -4,8 +4,6 @@
 
     public class EditCommentModel
     {
-        public string Id { get; set; }
-
         public string CommentText { get; set; }
 
         public string SanitizedText
