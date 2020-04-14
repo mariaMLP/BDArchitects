@@ -23,7 +23,7 @@
         [HttpPost]
         public async Task<IActionResult> AddAdminPost(AdminPostInputModel adminPost)
         {
-            await this.adminBlogService.CreateAdminPost(adminPost.ImageName, adminPost.Text);
+            await this.adminBlogService.CreateAdminPost(adminPost.SanitizedImageName, adminPost.SanitizedText);
 
             return this.Redirect($"/");
         }
