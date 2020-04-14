@@ -16,5 +16,7 @@
         Task EditBlogComment(string id, string commentText);
 
         BlogComment GetBlogComment(string blogPostId);
+
+        Task DeleteBlogPost(string blogPostId);
     }
 }

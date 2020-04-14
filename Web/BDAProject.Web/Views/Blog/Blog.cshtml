@@ -52,11 +52,11 @@
                                                             @comment.CreatedOn.ToString("F")
                                                         </div>
                                                         @if (this.User.Identity.Name == comment.UserName)
-                                                         {   
+                                                        {
                                                             <div class="button-holder">
                                                                 <a href="/Blog/EditBlogComment?blogCommentId=@comment.Id" class="btn btn-info text-uppercase">Edit</a>
                                                             </div>
-                                                         }
+                                                        }
                                                     </div>
                                                 </li>
                                                 <hr />
@@ -73,12 +73,17 @@
                             <div class="button-holder">
                                 <a href="/Blog/AddBlogComment?blogPostId=@item.Id" class="btn btn-info text-uppercase">Comment</a>
                             </div>
-                            
+                            @if (this.User.Identity.Name == "maria@abv.bg")
+                            {
+                                <div class="button-holder">
+                                    <a href="/Blog/DeleteBlogPost?blogPostId=@item.Id" class="btn btn-info text-uppercase">DELETE</a>
+                                </div>
+
+                            }
                         </div>
                     </div>
                 </div>
             </div>
-          
-        }
+         }
     </div>
 </section>

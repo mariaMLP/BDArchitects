@@ -69,5 +69,19 @@
 
             return this.Redirect($"/Blog/Blog");
         }
+
+        public IActionResult DeleteBlogPost()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> DeleteBlogPost(string blogPostId)
+        {
+            await this.blogService.DeleteBlogPost(blogPostId);
+
+            return this.Redirect($"/Blog/Blog");
+        }
     }
 }

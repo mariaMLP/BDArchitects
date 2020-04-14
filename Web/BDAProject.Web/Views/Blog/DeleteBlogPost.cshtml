@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "DeleteBlogPost";
+}
+
+<hr />
+<h2 class="mb-4">Are you sure you want to DELETE this post?</h2>
+<hr />
+<div class="button-holder">
+    <a href="/Blog/Blog" class="btn">Cancel</a>
+</div>
+@*<div class="button-holder">
+    <a href="/Blog/DeleteBlogPost?blogPostId" class="btn btn-danger">Delete</a>
+</div>*@
+
+<form method="post">
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+
