@@ -3,8 +3,9 @@
     using System.Collections.Generic;
 
     using BDAProject.Data.Models;
+    using BDAProject.Services.Mapping;
 
-    public class BlogPostAllModel
+    public class BlogPostAllModel : IMapFrom<BlogPost>
     {
         public string Id { get; set; }
 

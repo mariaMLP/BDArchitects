@@ -1,8 +1,10 @@
 ﻿namespace BDAProject.Web.ViewModels.Blog
 {
+    using BDAProject.Data.Models;
+    using BDAProject.Services.Mapping;
     using Ganss.XSS;
 
-    public class PostAddInputModel
+    public class PostAddInputModel : IMapTo<Post>
     {
         public string UserId { get; set; }
 

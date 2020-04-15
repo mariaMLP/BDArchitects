@@ -1,8 +1,10 @@
 ﻿namespace BDAProject.Web.ViewModels.Administration.BlogAdmin
 {
+    using BDAProject.Data.Models;
+    using BDAProject.Services.Mapping;
     using Ganss.XSS;
 
-    public class AdminPostInputModel
+    public class AdminPostInputModel : IMapTo<BlogPost>
     {
         public string ImageName { get; set; }
 

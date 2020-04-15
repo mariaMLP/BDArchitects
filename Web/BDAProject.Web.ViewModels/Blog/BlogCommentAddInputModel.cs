@@ -1,8 +1,10 @@
 ﻿namespace BDAProject.Web.ViewModels.Blog
 {
+    using BDAProject.Data.Models;
+    using BDAProject.Services.Mapping;
     using Ganss.XSS;
 
-    public class BlogCommentAddInputModel
+    public class BlogCommentAddInputModel : IMapTo<BlogComment>
     {
         public string CommentText { get; set; }
 
