@@ -33,6 +33,17 @@
                                 <div><a href="#">Admin</a></div>
                                 <div><a href="#" class="meta-like"><span class="icon-thumbs-up"></span>@item.BlogLikes.Count</a></div>
                                 @*<div><a href="#" class="meta-chat"><span class="icon-chat"></span>@item.BlogComments.Count</a></div>*@
+                                <form asp-controller="Blog" asp-action="Blog" method="post">
+                                    <input type="hidden" name="blogPostId" value="@item.Id" />
+                                    <input type="submit" class="btn btn-outline-primary" value="Like" />
+                                </form>
+                                <div>
+
+                                </div>
+                                <div class="button-holder">
+                                    <a href="/Blog/AddBlogComment?blogPostId=@item.Id" class="btn text-dark">Comment</a>
+                                </div>
+
                             </div>
                             <div class="desc pl-3">
                                 <h3 class="heading"><a href="#">@item.Text</a></h3>
@@ -55,8 +66,15 @@
                                                         @if (this.User.Identity.Name == comment.UserName)
                                                         {
                                                             <div class="button-holder">
-                                                                <a href="/Blog/EditBlogComment?blogCommentId=@comment.Id" class="btn btn-info text-uppercase">Edit</a>
+                                                                <a href="/Blog/EditBlogComment?blogCommentId=@comment.Id" class="btn btn-info">Edit</a>
                                                             </div>
+                                                        }
+                                                        @if (this.User.Identity.Name == "maria@abv.bg")
+                                                        {
+                                                            <div class="button-holder">
+                                                                <a href="/Blog/DeleteBlogComment?blogCommentId=@comment.Id" class="btn btn-danger">Delete</a>
+                                                            </div>
+
                                                         }
                                                     </div>
                                                 </li>
@@ -66,18 +84,10 @@
                                     </div>
                                 }
                             </div>
-                            <form asp-controller="Blog" asp-action="Blog" method="post">
-                                <input type="hidden" name="blogPostId" value="@item.Id" />
-                                <input type="submit" class="btn btn-outline-primary" value="Like" />
-                            </form>
-
-                            <div class="button-holder">
-                                <a href="/Blog/AddBlogComment?blogPostId=@item.Id" class="btn btn-info text-uppercase">Comment</a>
-                            </div>
-                            @if (this.User.Identity.Name == "maria@abv.bg")
+                           @if (this.User.Identity.Name == "maria@abv.bg")
                             {
                                 <div class="button-holder">
-                                        <a href="/Blog/DeleteBlogPost?blogPostId=@item.Id" class="btn btn-danger">DELETE</a>
+                                        <a href="/Blog/DeleteBlogPost?blogPostId=@item.Id" class="btn btn-danger">Delete</a>
                                 </div>
                                 
                             }

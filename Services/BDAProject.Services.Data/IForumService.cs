@@ -24,5 +24,9 @@
         Task EditComment(string id, string commentText);
 
         Comment GetComment(string commentId);
+
+        Task DeletePost(string postId);
+
+        Task DeleteComment(string commentId);
     }
 }

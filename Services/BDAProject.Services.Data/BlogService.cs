@@ -109,5 +109,15 @@
             this.blogPostRepository.Update(blogPost);
             await this.blogPostRepository.SaveChangesAsync();
         }
+
+        public async Task DeleteBlogComment(string blogCommentId)
+        {
+            var blogComment = this.blogCommentRepository.All().FirstOrDefault(x => x.Id == blogCommentId);
+            blogComment.IsDeleted = true;
+            blogComment.DeletedOn = DateTime.Now;
+
+            this.blogCommentRepository.Update(blogComment);
+            await this.blogCommentRepository.SaveChangesAsync();
+        }
     }
 }

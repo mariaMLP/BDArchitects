@@ -18,5 +18,7 @@
         BlogComment GetBlogComment(string blogPostId);
 
         Task DeleteBlogPost(string blogPostId);
+
+        Task DeleteBlogComment(string blogCommentId);
     }
 }

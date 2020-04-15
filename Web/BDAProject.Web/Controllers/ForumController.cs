@@ -104,5 +104,33 @@
 
             return this.Redirect($"/Forum/All");
         }
+
+        public IActionResult DeletePost()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> DeletePost(string postId)
+        {
+            await this.forumService.DeletePost(postId);
+
+            return this.Redirect($"/Forum/All");
+        }
+
+        public IActionResult DeleteComment()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> DeleteComment(string commentId)
+        {
+            await this.forumService.DeleteComment(commentId);
+
+            return this.Redirect($"/Forum/All");
+        }
     }
 }

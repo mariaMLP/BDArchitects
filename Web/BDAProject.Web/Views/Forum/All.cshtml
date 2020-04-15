@@ -8,24 +8,29 @@
         <div style="margin: 2%; text-align: center;">
             <a class="nav-link text-dark" asp-area="" asp-controller="Forum" asp-action="AddPost"><strong>Add Post</strong></a>
         </div>
-        <div style="padding: 5%;">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Username</th>
-                        <th scope="col">Post</th>
-                        <th scope="col">CreatedOn</th>
-                        <th scope="col">Likes</th>
-                        <th></th>
-                        <th>Add Comment</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
 
-                    @foreach (var item in Model)
-                    {
+        @foreach (var item in Model)
+        {
+            <div style="padding: 5%">
+
+                <table class="table">
+                    <thead class="thead-light">
                         <tr>
+                            <th>Post</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                   <tbody>
+                        <tr>
+                            <th>
+                                <img class="mr-3" src="~/images/profile_pic.jpg" alt="Generic placeholder image" style="max-width: 45px">
+                            </th>
                             <th scope="row">@item.UserName</th>
                             <td>@item.Text</td>
                             <td>@item.CreatedOn</td>
@@ -49,32 +54,50 @@
                                     </div>
                                 }
                             </td>
+                            <td>
+                                @if (this.User.Identity.Name == "maria@abv.bg")
+                                {
+                                    <div class="button-holder">
+                                        <a href="/Forum/DeletePost?postId=@item.Id" class="btn btn-danger">Delete</a>
+                                    </div>
+                                 }
+                            </td>
                         </tr>
-
-                        @if (item.Comments.Count != 0)
-                        {
-                            @foreach (var comment in item.Comments)
+                    </tbody>
+                </table>
+            </div>
+            @if (item.Comments.Count != 0)
+            {
+                @foreach (var comment in item.Comments)
+                {
+                    <li class="media">
+                        <img class="mr-3" src="~/images/profile_pic.jpg" alt="Generic placeholder image" style="max-width: 45px">
+                        <div class="media-body">
+                            <h6 class="mt-0 mb-1">@comment.UserName</h6>
+                            <div>
+                                @comment.CommentText
+                            </div>
+                            <div class="text-muted small">
+                                @comment.CreatedOn.ToString("F")
+                            </div>
+                            @if (this.User.Identity.Name == comment.UserName)
                             {
-                                <tr>
-                                    <th scope="row">@comment.UserName</th>
-                                    <td>@comment.CommentText</td>
-                                    <td>@comment.CreatedOn</td>
-                                    <td>
-                                        @if (this.User.Identity.Name == comment.UserName)
-                                        {
-                                            <div class="button-holder">
-                                                <a href="/Forum/EditComment?commentId=@comment.Id" class="btn btn-info text-uppercase">Edit</a>
-                                            </div>
-                                        }
-                                    </td>
-                                </tr>
+                                <div class="button-holder">
+                                    <a href="/Forum/EditComment?commentId=@comment.Id" class="btn btn-info text-uppercase">Edit</a>
+                                </div>
                             }
-                         
-                        }
-                    }
-                </tbody>
-                
-            </table>
-        </div>
+                            @if (this.User.Identity.Name == "maria@abv.bg")
+                            {
+                                <div class="button-holder">
+                                    <a href="/Forum/DeleteComment?commentId=@comment.Id" class="btn btn-danger">Delete</a>
+                                </div>
+
+                            }
+                        </div>
+                    </li>
+                    <hr />
+                }
+            }
+        }
     </div>
 </section>

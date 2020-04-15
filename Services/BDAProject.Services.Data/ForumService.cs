@@ -12,11 +12,11 @@
 
     public class ForumService : IForumService
     {
-        private readonly IRepository<Post> postRepository;
+        private readonly IDeletableEntityRepository<Post> postRepository;
         private readonly IRepository<Like> likeRepository;
-        private readonly IRepository<Comment> commentRepository;
+        private readonly IDeletableEntityRepository<Comment> commentRepository;
 
-        public ForumService(IRepository<Post> postRepository, IRepository<Like> likeRepository, IRepository<Comment> commentRepository)
+        public ForumService(IDeletableEntityRepository<Post> postRepository, IRepository<Like> likeRepository, IDeletableEntityRepository<Comment> commentRepository)
         {
             this.postRepository = postRepository;
             this.likeRepository = likeRepository;
@@ -138,6 +138,26 @@
         public Comment GetComment(string commentId)
         {
             return this.commentRepository.All().Where(c => c.Id == commentId).FirstOrDefault();
+        }
+
+        public async Task DeletePost(string postId)
+        {
+            var post = this.postRepository.All().FirstOrDefault(x => x.Id == postId);
+            post.IsDeleted = true;
+            post.DeletedOn = DateTime.Now;
+
+            this.postRepository.Update(post);
+            await this.postRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteComment(string commentId)
+        {
+            var comment = this.commentRepository.All().FirstOrDefault(x => x.Id == commentId);
+            comment.IsDeleted = true;
+            comment.DeletedOn = DateTime.Now;
+
+            this.commentRepository.Update(comment);
+            await this.commentRepository.SaveChangesAsync();
         }
     }
 }
