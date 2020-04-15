@@ -4,6 +4,7 @@
 
     using BDAProject.Services.Data;
     using BDAProject.Web.ViewModels.Administration.BlogAdmin;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class BlogAdminController : AdministrationController
@@ -25,7 +26,7 @@
         {
             await this.adminBlogService.CreateAdminPost(adminPost.SanitizedImageName, adminPost.SanitizedText);
 
-            return this.Redirect($"/");
+            return this.Redirect($"/Blog/Blog");
         }
     }
 }

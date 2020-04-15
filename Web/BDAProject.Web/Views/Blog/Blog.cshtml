@@ -17,9 +17,10 @@
             </div>
         }
 
-        @foreach (var item in Model)
-        {
-            <div class="row">
+        <div class="row">
+
+            @foreach (var item in Model)
+            {
                 <div class="col-md-4 ftco-animate">
                     <div class="blog-entry">
                         <img src="~/images/@item.ImageName" class="img-fluid" alt="Colorlib Template">
@@ -28,10 +29,10 @@
                         </a>
                         <div class="text d-flex py-4">
                             <div class="meta mb-3">
-                                <div><a href="#">@item.CreatedOn</a></div>
+                                <div><a href="#">@item.CreatedOn.ToString("dd/M/yyyy")</a></div>
                                 <div><a href="#">Admin</a></div>
                                 <div><a href="#" class="meta-like"><span class="icon-thumbs-up"></span>@item.BlogLikes.Count</a></div>
-                                <div><a href="#" class="meta-chat"><span class="icon-chat"></span>@item.BlogComments.Count</a></div>
+                                @*<div><a href="#" class="meta-chat"><span class="icon-chat"></span>@item.BlogComments.Count</a></div>*@
                             </div>
                             <div class="desc pl-3">
                                 <h3 class="heading"><a href="#">@item.Text</a></h3>
@@ -76,14 +77,16 @@
                             @if (this.User.Identity.Name == "maria@abv.bg")
                             {
                                 <div class="button-holder">
-                                    <a href="/Blog/DeleteBlogPost?blogPostId=@item.Id" class="btn btn-info text-uppercase">DELETE</a>
+                                        <a href="/Blog/DeleteBlogPost?blogPostId=@item.Id" class="btn btn-danger">DELETE</a>
                                 </div>
-
+                                
                             }
                         </div>
                     </div>
                 </div>
-            </div>
-         }
+            }
+        </div>
     </div>
 </section>
+
+
