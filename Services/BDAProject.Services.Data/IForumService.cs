@@ -1,5 +1,6 @@
 ﻿namespace BDAProject.Services.Data
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@
 
         int GetAllLikesById(string postId);
 
-        IQueryable<Post> GetAll();
+        IEnumerable<Post> GetAll();
 
         Post GetPost(string postId);
 

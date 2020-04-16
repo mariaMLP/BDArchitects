@@ -99,11 +99,12 @@
             return this.likeRepository.All().Where(l => l.PostId == postId).Count();
         }
 
-        public IQueryable<Post> GetAll()
+        public IEnumerable<Post> GetAll()
         {
-            return this.postRepository.All().Include(p => p.Likes)
+            return this.postRepository.All()
+                .Include(p => p.Likes)
                 .Include(p => p.Comments)
-                .OrderByDescending(p => p.CreatedOn);
+                .OrderByDescending(p => p.CreatedOn).ToList();
         }
 
         public Post GetPost(string postId)
