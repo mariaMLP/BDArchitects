@@ -1,5 +1,6 @@
 ﻿namespace BDAProject.Services.Data
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -20,5 +21,7 @@
         Task DeleteBlogPost(string blogPostId);
 
         Task DeleteBlogComment(string blogCommentId);
+
+        public IEnumerable<BlogPost> GetLatestThreeBlogPosts();
     }
 }

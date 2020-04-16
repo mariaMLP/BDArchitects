@@ -1,6 +1,7 @@
 ﻿namespace BDAProject.Services.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -118,6 +119,13 @@
 
             this.blogCommentRepository.Update(blogComment);
             await this.blogCommentRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<BlogPost> GetLatestThreeBlogPosts()
+        {
+            return this.blogPostRepository.All().Include(p => p.BlogLikes)
+                .Include(p => p.BlogComments)
+                .OrderByDescending(p => p.CreatedOn).Take(3).ToList();
         }
     }
 }

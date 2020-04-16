@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Default";
+}
+
+<div style="margin: 2%; text-align: center;">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Blog" asp-action="Blog"><h1>Latest posts from our Blog</h1></a>
+</div>
+<div class="row">
+   @foreach (var item in Model)
+    {
+        <div class="col-md-4 ftco-animate">
+            <div class="blog-entry">
+                <img src="~/images/@item.ImageName" class="img-fluid" alt="Colorlib Template">
+                <a href="~/images/@item.ImageName" class="icon image-popup d-flex justify-content-center align-items-center">
+                    <span class="icon-expand"></span>
+                </a>
+                <div class="text d-flex py-4">
+                    <div class="meta mb-3">
+                        <div><a href="#">@item.CreatedOn.ToString("dd/M/yyyy")</a></div>
+                        <div><a href="#">Admin</a></div>
+                        <div><a href="#" class="meta-like"><span class="icon-thumbs-up"></span>@item.BlogLikes.Count</a></div>
+                        <div><a href="#" class="meta-chat"><span class="icon-chat"></span>@item.BlogComments.Count</a></div>
+                    </div>
+                    <div class="desc pl-3">
+                        <h3 class="heading"><a href="/Blog/Blog">@item.Text</a></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
