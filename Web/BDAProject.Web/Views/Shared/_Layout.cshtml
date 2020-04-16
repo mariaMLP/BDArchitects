@@ -82,8 +82,8 @@
                     <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
                         <div class="col-md-7 text ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
                             <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">We Create Amazing Architecture Designs</h1>
-                            <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                            <p><a href="#" class="btn btn-white btn-outline-white px-4 py-3 mt-3">View our works</a></p>
+                            <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">To be really good, design has to follow the basic rule - the balance of individuality with aesthetics and functionality.</p>
+                            <p><a href="/Project/Project" class="btn btn-white btn-outline-white px-4 py-3 mt-3">View our works</a></p>
                         </div>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                     <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
                         <div class="col-md-7 text ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
                             <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Virtually Build Your House</h1>
-                            <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p><p><a href="#" class="btn btn-white btn-outline-white px-4 py-3 mt-3">View our works</a></p>
+                            <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">To be really good, design has to follow the basic rule - the balance of individuality with aesthetics and functionality.</p><p><a href="/Project/Project" class="btn btn-white btn-outline-white px-4 py-3 mt-3">View our works</a></p>
                         </div>
                     </div>
                 </div>
@@ -104,6 +104,7 @@
     }
     else
     {
+
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -112,50 +113,89 @@
 
                         @if (ViewData["Title"].ToString() == "About")
                         {
-                            <h1 text-light>About</h1>
+                            <h1><font color="white">About</font></h1>
                             <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></span> <span>About</span></p>
                         }
                         else if (ViewData["Title"].ToString() == "Contact")
                         {
-                            <h1 text-light>Contact</h1>
+                            <h1><font color="white">Contact</font></h1>
                             <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></span> <span>Contact</span></p>
                         }
                         else if (ViewData["Title"].ToString() == "Project")
                         {
-                            <h1 text-light>Project</h1>
+                            <h1><font color="white">Project</font></h1>
                             <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></span> <span>Project</span></p>
                         }
                         else if (ViewData["Title"].ToString() == "Login")
                         {
-                            <h1 text-light>Login</h1>
+                            <h1><font color="white">Login</font></h1>
                             <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></span> <span>Login</span></p>
                         }
                         else if (ViewData["Title"].ToString() == "Register")
                         {
-                            <h1 text-light>Register</h1>
+                            <h1><font color="white">Register</font></h1>
                             <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></span> <span>Register</span></p>
                         }
                         else if (ViewData["Title"].ToString() == "All")
                         {
-                            <h1 text-light>Forum</h1>
+                            <h1><font color="white">Forum</font></h1>
                             <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></span> <span>Forum</span></p>
                         }
                         else if (ViewData["Title"].ToString() == "AddPost")
                         {
-                            <h1 text-light>Add Post</h1>
+                            <h1><font color="white">Add Post</font></h1>
                             <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Forum" asp-action="All">Forum</a></span> <span>Add Post</span></p>
+                        }
+                        else if (ViewData["Title"].ToString() == "EditPost")
+                        {
+                            <h1><font color="white">Edit Post</font></h1>
+                            <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Forum" asp-action="All">Forum</a></span> <span>Edit Post</span></p>
+                        }
+                        else if (ViewData["Title"].ToString() == "DeletePost")
+                        {
+                            <h1><font color="white">Delete Post</font></h1>
+                            <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Forum" asp-action="All">Forum</a></span> <span>Delete Post</span></p>
                         }
                         else if (ViewData["Title"].ToString() == "AddComment")
                         {
-                            <h1 text-light>Add Comment</h1>
+                            <h1><font color="white">Add Comment</font></h1>
                             <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Forum" asp-action="All">Forum</a></span> <span>Add Comment</span></p>
+                        }
+                        else if (ViewData["Title"].ToString() == "EditComment")
+                        {
+                            <h1><font color="white">Edit Comment</font></h1>
+                            <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Forum" asp-action="All">Forum</a></span> <span>Edit Comment</span></p>
+                        }
+                        else if (ViewData["Title"].ToString() == "DeleteComment")
+                        {
+                            <h1><font color="white">Delete Comment</font></h1>
+                            <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Forum" asp-action="All">Forum</a></span> <span>Delete Comment</span></p>
                         }
                         else if (ViewData["Title"].ToString() == "Blog")
                         {
-                            <h1 text-light>Blog</h1>
+                            <h1><font color="white">Blog</font></h1>
                             <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></span> <span>Blog</span></p>
                         }
-
+                        else if (ViewData["Title"].ToString() == "AddAdminPost")
+                        {
+                            <h1><font color="white">Add Admin Post</font></h1>
+                            <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Blog" asp-action="Blog">Blog</a></span> <span>Add Admin Post</span></p>
+                        }
+                        else if (ViewData["Title"].ToString() == "AddBlogComment")
+                        {
+                            <h1><font color="white">Add Comment</font></h1>
+                            <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Blog" asp-action="Blog">Blog</a></span> <span>Add Comment</span></p>
+                        }
+                        else if (ViewData["Title"].ToString() == "EditBlogComment")
+                        {
+                            <h1><font color="white">Edit Comment</font></h1>
+                            <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Blog" asp-action="Blog">Blog</a></span> <span>Edit Comment</span></p>
+                        }
+                        else if (ViewData["Title"].ToString() == "DeleteBlogComment")
+                        {
+                            <h1><font color="white">Delete Comment</font></h1>
+                            <p class="breadcrumbs"><span class="mr-2"><a asp-area="" asp-controller="Blog" asp-action="Blog">Blog</a></span> <span>Delete Comment</span></p>
+                        }
                     </div>
                 </div>
             </div>
@@ -174,11 +214,11 @@
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">BDarchitects</h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                        <p>To be really good, design has to follow the basic rule - the balance of individuality with aesthetics and functionality.</p>
                         <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
-                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                            @*<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>*@
                             <li class="ftco-animate"><a href="https://www.facebook.com/bdarchstudio/"><span class="icon-facebook"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                            @*<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>*@
                         </ul>
                     </div>
                 </div>
@@ -188,21 +228,18 @@
                         <ul class="list-unstyled">
                             <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                             <li><a asp-area="" asp-controller="About" asp-action="About">About</a></li>
-                            <li><a href="#">Services</a></li>
                             <li><a asp-area="" asp-controller="Project" asp-action="Project">Projects</a></li>
-                            <li><a asp-area="" asp-controller="Contact" asp-action="Contact">Contact</a></li>
+
                         </ul>
                     </div>
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Services</h2>
+                        <h2 class="ftco-heading-2">Links</h2>
                         <ul class="list-unstyled">
-                            <li><a href="#">Architectural Design</a></li>
-                            <li><a href="#">Interior Design</a></li>
-                            <li><a href="#">Exterior Design</a></li>
-                            <li><a href="#">Lighting Design</a></li>
-                            <li><a href="#">AutoCAD Service</a></li>
+                            <li><a asp-area="" asp-controller="Blog" asp-action="Blog">Blog</a></li>
+                            <li><a asp-area="" asp-controller="Forum" asp-action="All">Forum</a></li>
+                            <li><a asp-area="" asp-controller="Contact" asp-action="Contact">Contact</a></li>
                         </ul>
                     </div>
                 </div>
