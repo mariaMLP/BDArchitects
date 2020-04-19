@@ -1,5 +1,7 @@
 ﻿namespace BDAProject.Web.ViewModels.Contact
 {
+    using System.ComponentModel.DataAnnotations;
+
     using Ganss.XSS;
 
     public class ContactInputModel
@@ -9,6 +11,7 @@
         public string SanitizedName
            => new HtmlSanitizer().Sanitize(this.Name);
 
+        [EmailAddress]
         public string Email { get; set; }
 
         public string SanitizedEmail
