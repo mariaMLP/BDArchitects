@@ -6,9 +6,9 @@
     [ViewComponent(Name = "LatestThreeBlogPosts")]
     public class LatestThreeBlogPostsViewComponent : ViewComponent
     {
-        private readonly IBlogService blogService;
+        private readonly IBlogPostService blogService;
 
-        public LatestThreeBlogPostsViewComponent(IBlogService blogService)
+        public LatestThreeBlogPostsViewComponent(IBlogPostService blogService)
         {
             this.blogService = blogService;
         }

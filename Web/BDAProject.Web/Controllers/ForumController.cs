@@ -13,18 +13,22 @@
 
     public class ForumController : Controller
     {
-        private readonly IForumService forumService;
+        private readonly IPostService postService;
+        private readonly ILikeService likeService;
+        private readonly ICommentService commentService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public ForumController(IForumService forumService, UserManager<ApplicationUser> userManager)
+        public ForumController(IPostService postService, ILikeService likeService, ICommentService commentService, UserManager<ApplicationUser> userManager)
         {
-            this.forumService = forumService;
+            this.postService = postService;
+            this.likeService = likeService;
+            this.commentService = commentService;
             this.userManager = userManager;
         }
 
         public IActionResult All()
         {
-            return this.View(this.forumService.GetAll());
+            return this.View(this.postService.GetAll());
         }
 
         [HttpPost]
@@ -34,7 +38,7 @@
             var userId = this.userManager.GetUserId(this.User);
             var username = this.userManager.GetUserName(this.User);
 
-            await this.forumService.CreateLike(userId, postId, username);
+            await this.likeService.CreateLike(userId, postId, username);
 
             return this.Redirect($"/Forum/All");
         }
@@ -52,7 +56,7 @@
             var userId = this.userManager.GetUserId(this.User);
             var username = this.userManager.GetUserName(this.User);
 
-            await this.forumService.CreatePost(userId, postInput.SanitizedText, username);
+            await this.postService.CreatePost(userId, postInput.SanitizedText, username);
 
             return this.Redirect($"/Forum/All");
         }
@@ -70,7 +74,7 @@
             var userId = this.userManager.GetUserId(this.User);
             var username = this.userManager.GetUserName(this.User);
 
-            await this.forumService.CreateComment(userId, postId, username, commentInput.SanitizedCommentText);
+            await this.commentService.CreateComment(userId, postId, username, commentInput.SanitizedCommentText);
 
             return this.Redirect($"/Forum/All");
         }
@@ -78,14 +82,14 @@
         [Authorize]
         public IActionResult EditPost(string postId)
         {
-            return this.View(this.forumService.GetPost(postId));
+            return this.View(this.postService.GetPost(postId));
         }
 
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> EditPost(string postId, EditPostModel editPostModel)
         {
-            await this.forumService.EditPost(postId, editPostModel.SanitizedText);
+            await this.postService.EditPost(postId, editPostModel.SanitizedText);
 
             return this.Redirect($"/Forum/All");
         }
@@ -93,14 +97,14 @@
         [Authorize]
         public IActionResult EditComment(string commentId)
         {
-            return this.View(this.forumService.GetComment(commentId));
+            return this.View(this.commentService.GetComment(commentId));
         }
 
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> EditComment(string commentId, EditCommentModel editCommentModel)
         {
-            await this.forumService.EditComment(commentId, editCommentModel.SanitizedText);
+            await this.commentService.EditComment(commentId, editCommentModel.SanitizedText);
 
             return this.Redirect($"/Forum/All");
         }
@@ -114,7 +118,7 @@
         [Authorize]
         public async Task<IActionResult> DeletePost(string postId)
         {
-            await this.forumService.DeletePost(postId);
+            await this.postService.DeletePost(postId);
 
             return this.Redirect($"/Forum/All");
         }
@@ -128,7 +132,7 @@
         [Authorize]
         public async Task<IActionResult> DeleteComment(string commentId)
         {
-            await this.forumService.DeleteComment(commentId);
+            await this.commentService.DeleteComment(commentId);
 
             return this.Redirect($"/Forum/All");
         }

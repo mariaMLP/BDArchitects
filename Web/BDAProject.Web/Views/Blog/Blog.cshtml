@@ -2,6 +2,11 @@
     ViewData["Title"] = "Blog";
 }
 
+<head>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+</head>
+
 <section class="ftco-section">
     <div class="container">
         <div class="row justify-content-center mb-5 pb-3">
@@ -32,18 +37,18 @@
                                 <div><a href="#">@item.CreatedOn.ToString("dd/M/yyyy")</a></div>
                                 <div><a href="#">Admin</a></div>
                                 <div><a href="#" class="meta-like"><span class="icon-thumbs-up"></span>@item.BlogLikes.Count</a></div>
-                                @*<div><a href="#" class="meta-chat"><span class="icon-chat"></span>@item.BlogComments.Count</a></div>*@
+
                                 <form asp-controller="Blog" asp-action="Blog" method="post">
-                                    <input type="hidden" name="blogPostId" value="@item.Id" />
-                                    <input type="submit" class="btn btn-outline-primary" value="Like" />
+                                        <input type="hidden" name="blogPostId" value="@item.Id" />
+                                        <input type="submit" class="btn btn-outline-primary" id="Like" value="Like" />
                                 </form>
+                                @*<button type="submit" id="Like" value="Like" onclick="likeClicked();">Like</button>*@
                                 <div>
 
                                 </div>
                                 <div class="button-holder">
                                     <a href="/Blog/AddBlogComment?blogPostId=@item.Id" class="btn text-dark">Comment</a>
                                 </div>
-
                             </div>
                             <div class="desc pl-3">
                                 <h3 class="heading"><a href="#">@item.Text</a></h3>
@@ -84,12 +89,12 @@
                                     </div>
                                 }
                             </div>
-                           @if (this.User.Identity.Name == "maria@abv.bg")
+                            @if (this.User.Identity.Name == "maria@abv.bg")
                             {
                                 <div class="button-holder">
-                                        <a href="/Blog/DeleteBlogPost?blogPostId=@item.Id" class="btn btn-danger">Delete</a>
+                                    <a href="/Blog/DeleteBlogPost?blogPostId=@item.Id" class="btn btn-danger">Delete</a>
                                 </div>
-                                
+
                             }
                         </div>
                     </div>
@@ -98,5 +103,27 @@
         </div>
     </div>
 </section>
+
+<script>
+    function sendVote(postId, isUpVote) {
+        var token = $("#votesForm input[name=__RequestVerificationToken]").val();
+        var json = { postId: postId, isUpVote: isUpVote };
+        $.ajax({
+            url: "/api/votes",
+            type: "POST",
+            data: JSON.stringify(json),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            headers: { 'X-CSRF-TOKEN': token },
+            success: function (data) {
+                $("#votesCount").html(data.votesCount);
+            }
+        });
+    }
+</script>
+
+
+
+
 
 

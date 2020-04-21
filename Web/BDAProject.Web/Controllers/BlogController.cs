@@ -11,18 +11,22 @@
 
     public class BlogController : Controller
     {
-        private readonly IBlogService blogService;
+        private readonly IBlogPostService blogPostService;
+        private readonly IBlogCommentService blogCommentService;
+        private readonly IBlogLikeService blogLikeService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public BlogController(IBlogService blogService, UserManager<ApplicationUser> userManager)
+        public BlogController(IBlogPostService blogPostService, IBlogCommentService blogCommentService, IBlogLikeService blogLikeService,  UserManager<ApplicationUser> userManager)
         {
-            this.blogService = blogService;
+            this.blogPostService = blogPostService;
+            this.blogCommentService = blogCommentService;
+            this.blogLikeService = blogLikeService;
             this.userManager = userManager;
         }
 
         public IActionResult Blog()
         {
-            return this.View(this.blogService.GetAll());
+            return this.View(this.blogPostService.GetAll());
         }
 
         [HttpPost]
@@ -32,7 +36,7 @@
             var userId = this.userManager.GetUserId(this.User);
             var username = this.userManager.GetUserName(this.User);
 
-            await this.blogService.CreateBlogLike(userId, blogPostId, username);
+            await this.blogLikeService.CreateBlogLike(userId, blogPostId, username);
 
             return this.Redirect($"/Blog/Blog");
         }
@@ -50,7 +54,7 @@
             var userId = this.userManager.GetUserId(this.User);
             var username = this.userManager.GetUserName(this.User);
 
-            await this.blogService.CreateBlogComment(userId, blogPostId, username, blogCommentInput.SanitizedCommentText);
+            await this.blogCommentService.CreateBlogComment(userId, blogPostId, username, blogCommentInput.SanitizedCommentText);
 
             return this.Redirect($"/Blog/Blog");
         }
@@ -58,14 +62,14 @@
         [Authorize]
         public IActionResult EditBlogComment(string blogCommentId)
         {
-            return this.View(this.blogService.GetBlogComment(blogCommentId));
+            return this.View(this.blogCommentService.GetBlogComment(blogCommentId));
         }
 
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> EditBlogComment(string blogCommentId, EditBlogCommentModel editBlogCommentModel)
         {
-            await this.blogService.EditBlogComment(blogCommentId, editBlogCommentModel.SanitizedCommentText);
+            await this.blogCommentService.EditBlogComment(blogCommentId, editBlogCommentModel.SanitizedCommentText);
 
             return this.Redirect($"/Blog/Blog");
         }
@@ -79,7 +83,7 @@
         [Authorize]
         public async Task<IActionResult> DeleteBlogPost(string blogPostId)
         {
-            await this.blogService.DeleteBlogPost(blogPostId);
+            await this.blogPostService.DeleteBlogPost(blogPostId);
 
             return this.Redirect($"/Blog/Blog");
         }
@@ -93,7 +97,7 @@
         [Authorize]
         public async Task<IActionResult> DeleteBlogComment(string blogCommentId)
         {
-            await this.blogService.DeleteBlogComment(blogCommentId);
+            await this.blogCommentService.DeleteBlogComment(blogCommentId);
 
             return this.Redirect($"/Blog/Blog");
         }
