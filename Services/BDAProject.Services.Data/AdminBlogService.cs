@@ -31,15 +31,5 @@
 
             await this.blogPostRepository.SaveChangesAsync();
         }
-
-        public async Task DeleteBlogPost(string blogPostId)
-        {
-            var blogPost = this.blogPostRepository.All().FirstOrDefault(x => x.Id == blogPostId);
-            blogPost.IsDeleted = true;
-            blogPost.DeletedOn = DateTime.Now;
-
-            this.blogPostRepository.Update(blogPost);
-            await this.blogPostRepository.SaveChangesAsync();
-        }
     }
 }

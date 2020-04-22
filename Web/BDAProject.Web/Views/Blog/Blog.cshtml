@@ -1,11 +1,7 @@
-﻿@{
+﻿@using BDAProject.Common
+@{
     ViewData["Title"] = "Blog";
 }
-
-<head>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-</head>
 
 <section class="ftco-section">
     <div class="container">
@@ -15,7 +11,7 @@
                 <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
             </div>
         </div>
-        @if (this.User.Identity.Name == "maria@abv.bg")
+        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
             <div style="margin: 2%; text-align: center;">
                 <a class="nav-link text-dark" asp-area="Administration" asp-controller="BlogAdmin" asp-action="AddAdminPost"><strong>Add Post to Blog</strong></a>
@@ -37,12 +33,10 @@
                                 <div><a href="#">@item.CreatedOn.ToString("dd/M/yyyy")</a></div>
                                 <div><a href="#">Admin</a></div>
                                 <div><a href="#" class="meta-like"><span class="icon-thumbs-up"></span>@item.BlogLikes.Count</a></div>
-
                                 <form asp-controller="Blog" asp-action="Blog" method="post">
-                                        <input type="hidden" name="blogPostId" value="@item.Id" />
-                                        <input type="submit" class="btn btn-outline-primary" id="Like" value="Like" />
+                                   <input type="hidden" name="blogPostId" value="@item.Id" />
+                                   <input type="submit" class="btn btn-outline-primary" id="Like" value="Like" />
                                 </form>
-                                @*<button type="submit" id="Like" value="Like" onclick="likeClicked();">Like</button>*@
                                 <div>
 
                                 </div>
@@ -74,7 +68,7 @@
                                                                 <a href="/Blog/EditBlogComment?blogCommentId=@comment.Id" class="btn btn-info">Edit</a>
                                                             </div>
                                                         }
-                                                        @if (this.User.Identity.Name == "maria@abv.bg")
+                                                        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                                                         {
                                                             <div class="button-holder">
                                                                 <a href="/Blog/DeleteBlogComment?blogCommentId=@comment.Id" class="btn btn-danger">Delete</a>
@@ -89,7 +83,7 @@
                                     </div>
                                 }
                             </div>
-                            @if (this.User.Identity.Name == "maria@abv.bg")
+                            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                             {
                                 <div class="button-holder">
                                     <a href="/Blog/DeleteBlogPost?blogPostId=@item.Id" class="btn btn-danger">Delete</a>
@@ -103,24 +97,6 @@
         </div>
     </div>
 </section>
-
-<script>
-    function sendVote(postId, isUpVote) {
-        var token = $("#votesForm input[name=__RequestVerificationToken]").val();
-        var json = { postId: postId, isUpVote: isUpVote };
-        $.ajax({
-            url: "/api/votes",
-            type: "POST",
-            data: JSON.stringify(json),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            headers: { 'X-CSRF-TOKEN': token },
-            success: function (data) {
-                $("#votesCount").html(data.votesCount);
-            }
-        });
-    }
-</script>
 
 
 
