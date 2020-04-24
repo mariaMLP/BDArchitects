@@ -1,4 +1,5 @@
 ﻿@using BDAProject.Common
+@model List<BDAProject.Web.ViewModels.Blog.BlogPostAllModel>
 @{
     ViewData["Title"] = "Blog";
 }
@@ -30,13 +31,19 @@
                         </a>
                         <div class="text d-flex py-4">
                             <div class="meta mb-3">
-                                <div><a href="#">@item.CreatedOn.ToString("dd/M/yyyy")</a></div>
+                                <div><a href="#">@item.CreatedOn.ToString("g")</a></div>
                                 <div><a href="#">Admin</a></div>
-                                <div><a href="#" class="meta-like"><span class="icon-thumbs-up"></span>@item.BlogLikes.Count</a></div>
-                                <form asp-controller="Blog" asp-action="Blog" method="post">
-                                   <input type="hidden" name="blogPostId" value="@item.Id" />
-                                   <input type="submit" class="btn btn-outline-primary" id="Like" value="Like" />
-                                </form>
+                                @*<div><a href="#" class="meta-like"><span class="icon-thumbs-up"></span>@item.BlogLikes.Count</a></div>*@
+                                @*<form asp-controller="Blog" asp-action="Blog" method="post">
+                                      <input type="hidden" name="blogPostId" value="@item.Id" />
+                                      <input type="submit" class="btn btn-outline-primary" id="Like" value="Like" />
+                                  </form>*@
+                                <div>
+                                    <form id="antiForgeryForm" method="post" asp-antiforgery="false">
+                                        <div><a onclick="sendLike('@item.Id')" class="meta-like"><span class="icon-thumbs-up"></span></a></div>
+                                    </form>
+                                    <div id="blogLikesCount">@item.BlogLikesCount</div>
+                                </div>
                                 <div>
 
                                 </div>
@@ -60,7 +67,7 @@
                                                             @comment.CommentText
                                                         </div>
                                                         <div class="text-muted small">
-                                                            @comment.CreatedOn.ToString("F")
+                                                            @comment.CreatedOn.ToString("g")
                                                         </div>
                                                         @if (this.User.Identity.Name == comment.UserName)
                                                         {
@@ -97,6 +104,28 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <script>
+        function sendLike(blogPostId) {
+            var token = $("#antiForgeryForm input[name=__RequestVerificationToken]").val();
+            var json = { blogPostId: blogPostId };
+            console.log(json);
+            $.ajax({
+                url: '@Url.Action("MakeLike", "Likes")',
+                type: "POST",
+                data: JSON.stringify(json),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: { 'X-CSRF-TOKEN': token },
+                success: function (data) {
+                    console.log(data.LikesCount);
+                    $("#blogLikesCount").html(data.BlogLikesCount);
+                }
+            });
+        }
+    </script>
+}
 
 
 

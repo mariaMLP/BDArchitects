@@ -5,5 +5,7 @@
     public interface IBlogLikeService
     {
         Task CreateBlogLike(string userId, string blogPostId, string username);
+
+        int GetLikes(string blogPostId);
     }
 }

@@ -34,7 +34,7 @@
                             </th>
                             <th scope="row">@item.UserName</th>
                             <td>@item.Text</td>
-                            <td>@item.CreatedOn</td>
+                            <td>@item.CreatedOn.ToString("g")</td>
                             <td>@item.Likes.Count</td>
                             <td>
                                 <form asp-controller="Forum" asp-action="All" method="post">
@@ -80,7 +80,7 @@
                                 @comment.CommentText
                             </div>
                             <div class="text-muted small">
-                                @comment.CreatedOn.ToString("F")
+                                @comment.CreatedOn.ToString("g")
                             </div>
                             @if (this.User.Identity.Name == comment.UserName)
                             {

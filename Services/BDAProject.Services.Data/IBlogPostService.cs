@@ -8,10 +8,12 @@
 
     public interface IBlogPostService
     {
-        IQueryable<BlogPost> GetAll();
+        IEnumerable<BlogPost> GetAll();
 
         Task DeleteBlogPost(string blogPostId);
 
         IEnumerable<BlogPost> GetLatestThreeBlogPosts();
+
+        IEnumerable<T> GetAllPosts<T>();
     }
 }

@@ -26,7 +26,7 @@
 
         public IActionResult Blog()
         {
-            return this.View(this.blogPostService.GetAll());
+            return this.View(this.blogPostService.GetAllPosts<BlogPostAllModel>());
         }
 
         [HttpPost]

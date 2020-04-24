@@ -47,5 +47,12 @@
                 post.BlogLikes.Add(blogLikeNew);
             }
         }
+
+        public int GetLikes(string blogPostId)
+        {
+            var likes = this.blogLikeRepository.All()
+                .Where(x => x.BlogPostId == blogPostId).Count();
+            return likes;
+        }
     }
 }

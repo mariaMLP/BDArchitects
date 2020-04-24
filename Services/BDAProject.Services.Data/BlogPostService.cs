@@ -7,6 +7,8 @@
 
     using BDAProject.Data.Common.Repositories;
     using BDAProject.Data.Models;
+    using BDAProject.Services.Mapping;
+    using BDAProject.Web.ViewModels.Blog;
     using Microsoft.EntityFrameworkCore;
 
     public class BlogPostService : IBlogPostService
@@ -18,11 +20,19 @@
             this.blogPostRepository = blogPostRepository;
         }
 
-        public IQueryable<BlogPost> GetAll()
+        public IEnumerable<BlogPost> GetAll()
         {
             return this.blogPostRepository.All().Include(p => p.BlogLikes)
                 .Include(p => p.BlogComments)
                 .OrderByDescending(p => p.CreatedOn);
+        }
+
+        public IEnumerable<T> GetAllPosts<T>()
+        {
+            return this.blogPostRepository.All()
+                .Include(p => p.BlogLikes)
+                .Include(p => p.BlogComments)
+                .OrderByDescending(p => p.CreatedOn).To<T>().ToList();
         }
 
         public async Task DeleteBlogPost(string blogPostId)

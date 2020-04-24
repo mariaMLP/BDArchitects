@@ -4,6 +4,7 @@
 
     using BDAProject.Data.Models;
     using BDAProject.Services.Data;
+    using BDAProject.Web.ViewModels.Likes;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -21,16 +22,17 @@
             this.userManager = userManager;
         }
 
-        [HttpPost]
         [Authorize]
-        public async Task<IActionResult> MakeLike(string blogPostId)
+        [HttpPost]
+        public async Task<ActionResult<LikeResponseModel>> MakeLike(LikeViewModel model)
         {
             var userId = this.userManager.GetUserId(this.User);
             var username = this.userManager.GetUserName(this.User);
 
-            await this.likeService.CreateBlogLike(userId, blogPostId, username);
+            await this.likeService.CreateBlogLike(userId, model.BlogPostId, username);
 
-            return this.Redirect($"/Blog/Blog");
+            var blogLikesCount = this.likeService.GetLikes(model.BlogPostId);
+            return new LikeResponseModel { BlogLikesCount = blogLikesCount };
         }
     }
 }
