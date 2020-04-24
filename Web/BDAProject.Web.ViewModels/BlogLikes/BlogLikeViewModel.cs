@@ -1,4 +1,4 @@
-﻿namespace BDAProject.Web.ViewModels.Likes
+﻿namespace BDAProject.Web.ViewModels.BlogLikes
 {
     public class BlogLikeViewModel
     {

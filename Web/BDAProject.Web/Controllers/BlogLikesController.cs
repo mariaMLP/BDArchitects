@@ -4,7 +4,7 @@
 
     using BDAProject.Data.Models;
     using BDAProject.Services.Data;
-    using BDAProject.Web.ViewModels.Likes;
+    using BDAProject.Web.ViewModels.BlogLikes;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
