@@ -33,20 +33,14 @@
                             <div class="meta mb-3">
                                 <div><a href="#">@item.CreatedOn.ToString("g")</a></div>
                                 <div><a href="#">Admin</a></div>
-                                @*<div><a href="#" class="meta-like"><span class="icon-thumbs-up"></span>@item.BlogLikes.Count</a></div>*@
-                                @*<form asp-controller="Blog" asp-action="Blog" method="post">
-                                      <input type="hidden" name="blogPostId" value="@item.Id" />
-                                      <input type="submit" class="btn btn-outline-primary" id="Like" value="Like" />
-                                  </form>*@
-                                <div>
-                                    <form id="antiForgeryForm" method="post" asp-antiforgery="false">
-                                        <div><a onclick="sendLike('@item.Id')" class="meta-like"><span class="icon-thumbs-up"></span></a></div>
-                                    </form>
-                                    <div id="blogLikesCount">@item.BlogLikesCount</div>
-                                </div>
-                                <div>
-
-                                </div>
+                                <form id="antiForgeryForm" method="post" asp-antiforgery="false">
+                                    <div>
+                                        <a onclick="sendBlogLike('@item.Id')" class="meta-like">
+                                            <span class="icon-thumbs-up"></span>
+                                        </a>
+                                    </div>
+                                </form>
+                                <div id="blogLikesCount" name="blogLikesCount">@item.BlogLikesCount</div>
                                 <div class="button-holder">
                                     <a href="/Blog/AddBlogComment?blogPostId=@item.Id" class="btn text-dark">Comment</a>
                                 </div>
@@ -107,28 +101,21 @@
 
 @section Scripts {
     <script>
-        function sendLike(blogPostId) {
-            var token = $("#antiForgeryForm input[name=__RequestVerificationToken]").val();
-            var json = { blogPostId: blogPostId };
-            console.log(json);
-            $.ajax({
-                url: '@Url.Action("MakeLike", "Likes")',
-                type: "POST",
-                data: JSON.stringify(json),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                headers: { 'X-CSRF-TOKEN': token },
-                success: function (data) {
-                    console.log(data.LikesCount);
-                    $("#blogLikesCount").html(data.BlogLikesCount);
-                }
-            });
+    function sendBlogLike(blogPostId) {
+    var token = $("#antiForgeryForm input[name=__RequestVerificationToken]").val();
+    var json = { blogPostId: blogPostId };
+    console.log(json);
+    $.ajax({
+        url: '@Url.Action("MakeLike", "BlogLikes")',
+        type: "POST",
+        data: JSON.stringify(json),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: { 'X-CSRF-TOKEN': token },
+        success: function (data) {
+            $("#blogLikesCount").replaceWith(data.blogLikesCount);
         }
+    });
+}
     </script>
 }
-
-
-
-
-
-

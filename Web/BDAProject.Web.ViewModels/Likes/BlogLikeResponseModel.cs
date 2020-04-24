@@ -1,6 +1,6 @@
 ﻿namespace BDAProject.Web.ViewModels.Likes
 {
-    public class LikeResponseModel
+    public class BlogLikeResponseModel
     {
         public int BlogLikesCount { get; set; }
     }

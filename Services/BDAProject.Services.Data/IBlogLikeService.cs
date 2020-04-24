@@ -6,6 +6,6 @@
     {
         Task CreateBlogLike(string userId, string blogPostId, string username);
 
-        int GetLikes(string blogPostId);
+        int GetBlogLikes(string blogPostId);
     }
 }

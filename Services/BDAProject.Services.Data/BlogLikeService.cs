@@ -48,11 +48,11 @@
             }
         }
 
-        public int GetLikes(string blogPostId)
+        public int GetBlogLikes(string blogPostId)
         {
-            var likes = this.blogLikeRepository.All()
+            var blogLikes = this.blogLikeRepository.All()
                 .Where(x => x.BlogPostId == blogPostId).Count();
-            return likes;
+            return blogLikes;
         }
     }
 }
