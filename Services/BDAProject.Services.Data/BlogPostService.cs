@@ -8,7 +8,6 @@
     using BDAProject.Data.Common.Repositories;
     using BDAProject.Data.Models;
     using BDAProject.Services.Mapping;
-    using BDAProject.Web.ViewModels.Blog;
     using Microsoft.EntityFrameworkCore;
 
     public class BlogPostService : IBlogPostService

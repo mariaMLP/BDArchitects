@@ -29,18 +29,6 @@
             return this.View(this.blogPostService.GetAllPosts<BlogPostAllModel>());
         }
 
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> Blog(string blogPostId)
-        {
-            var userId = this.userManager.GetUserId(this.User);
-            var username = this.userManager.GetUserName(this.User);
-
-            await this.blogLikeService.CreateBlogLike(userId, blogPostId, username);
-
-            return this.Redirect($"/Blog/Blog");
-        }
-
         [Authorize]
         public IActionResult AddBlogComment()
         {

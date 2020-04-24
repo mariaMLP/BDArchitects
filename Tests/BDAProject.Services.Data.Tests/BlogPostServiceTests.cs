@@ -2,11 +2,14 @@
 {
     using System;
     using System.Linq;
+    using System.Reflection;
     using System.Threading.Tasks;
 
     using BDAProject.Data;
     using BDAProject.Data.Models;
     using BDAProject.Data.Repositories;
+    using BDAProject.Services.Mapping;
+    using BDAProject.Web.ViewModels.Blog;
     using Microsoft.EntityFrameworkCore;
     using Xunit;
 
@@ -41,31 +44,22 @@
         }
 
         [Fact]
-        private void GetAllShouldReturnListOfBlogPostsFromDB()
+        private async Task GetAllShouldReturnListOfBlogPostsFromDB()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
 
             var dbContext = new ApplicationDbContext(options);
+
+            dbContext.BlogPosts.Add(new BlogPost());
+
+            await dbContext.SaveChangesAsync();
 
             var blogPostRepository = new EfDeletableEntityRepository<BlogPost>(dbContext);
 
             var service = new BlogPostService(blogPostRepository);
 
-            dbContext.BlogPosts.Add(new BlogPost
-            {
-                Id = "blogPostId",
-                ImageName = "imageName",
-                Text = "text",
-                CreatedOn = DateTime.UtcNow,
-                UserId = "userId",
-            });
-
-            dbContext.SaveChanges();
-
-            var blogPosts = service.GetAll();
-
-            Assert.True(blogPosts.Count() == 1);
+            Assert.True(service.GetAll().Count() == 1);
         }
 
         [Fact]
