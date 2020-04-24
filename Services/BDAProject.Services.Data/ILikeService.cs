@@ -5,5 +5,7 @@
     public interface ILikeService
     {
         Task CreateLike(string userId, string postId, string username);
+
+        int GetLikes(string postId);
     }
 }

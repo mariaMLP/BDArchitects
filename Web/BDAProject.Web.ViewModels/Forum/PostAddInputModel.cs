@@ -1,4 +1,4 @@
-﻿namespace BDAProject.Web.ViewModels.Blog
+﻿namespace BDAProject.Web.ViewModels.Forum
 {
     using BDAProject.Data.Models;
     using BDAProject.Services.Mapping;

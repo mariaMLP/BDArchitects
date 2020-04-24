@@ -47,5 +47,12 @@
                 post.Likes.Add(likeNew);
             }
         }
+
+        public int GetLikes(string postId)
+        {
+            var likes = this.likeRepository.All()
+                .Where(x => x.PostId == postId).Count();
+            return likes;
+        }
     }
 }

@@ -7,6 +7,7 @@
 
     using BDAProject.Data.Common.Repositories;
     using BDAProject.Data.Models;
+    using BDAProject.Services.Mapping;
     using Microsoft.EntityFrameworkCore;
 
     public class PostService : IPostService
@@ -67,6 +68,14 @@
                 .Include(p => p.Likes)
                 .Include(p => p.Comments)
                 .OrderByDescending(p => p.CreatedOn).ToList();
+        }
+
+        public IEnumerable<T> GetAllPosts<T>()
+        {
+            return this.postRepository.All()
+                .Include(p => p.Likes)
+                .Include(p => p.Comments)
+                .OrderByDescending(p => p.CreatedOn).To<T>().ToList();
         }
     }
 }

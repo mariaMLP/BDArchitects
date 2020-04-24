@@ -28,7 +28,7 @@
 
         public IActionResult All()
         {
-            return this.View(this.postService.GetAll());
+            return this.View(this.postService.GetAllPosts<PostAllModel>());
         }
 
         [HttpPost]

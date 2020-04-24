@@ -1,4 +1,5 @@
 ﻿@using BDAProject.Common
+@model List<BDAProject.Web.ViewModels.Forum.PostAllModel>
 @{
     ViewData["Title"] = "All";
 }
@@ -35,12 +36,21 @@
                             <th scope="row">@item.UserName</th>
                             <td>@item.Text</td>
                             <td>@item.CreatedOn.ToString("g")</td>
-                            <td>@item.Likes.Count</td>
+                            <td> <div id="likesCount" name="likesCount">@item.LikesCount</div></td>
                             <td>
-                                <form asp-controller="Forum" asp-action="All" method="post">
+                                @*<form asp-controller="Forum" asp-action="All" method="post">
                                     <input type="hidden" name="postId" value="@item.Id" />
                                     <input type="submit" class="btn btn-outline-primary" value="Like" />
+                                </form>*@
+
+                                <form id="antiForgeryForm" method="post" asp-antiforgery="false">
+                                    <div>
+                                        <a onclick="sendLike('@item.Id')" class="meta-like">
+                                            <span class="icon-thumbs-up"></span>
+                                        </a>
+                                    </div>
                                 </form>
+                               
                             </td>
                             <td>
                                 <div class="button-holder">
@@ -103,3 +113,24 @@
         }
     </div>
 </section>
+
+@section Scripts {
+    <script>
+    function sendLike(postId) {
+    var token = $("#antiForgeryForm input[name=__RequestVerificationToken]").val();
+    var json = { postId: postId };
+    console.log(json);
+    $.ajax({
+        url: '@Url.Action("MakeLike", "Likes")',
+        type: "POST",
+        data: JSON.stringify(json),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: { 'X-CSRF-TOKEN': token },
+        success: function (data) {
+            $("#likesCount").replaceWith(data.likesCount);
+        }
+    });
+}
+    </script>
+}

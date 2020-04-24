@@ -17,5 +17,7 @@
         Post GetPost(string postId);
 
         IEnumerable<Post> GetAll();
+
+        IEnumerable<T> GetAllPosts<T>();
     }
 }
